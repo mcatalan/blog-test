@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Author
+use Illuminate\Contracts\Support\Arrayable;
+
+class Author implements Arrayable
 {
     public function __construct(
         private int $id,
@@ -88,5 +90,18 @@ class Author
     public function setCompany(Company $company): void
     {
         $this->company = $company;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            "name" => $this->getName(),
+            "username" => $this->getUsername(),
+            "email" => $this->getEmail(),
+            "address" => $this->getAddress(),
+            "phone" => $this->getPhone(),
+            "website" => $this->getWebsite(),
+            "company" => $this->getCompany(),
+        ];
     }
 }

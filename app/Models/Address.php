@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Address
+use Illuminate\Contracts\Support\Arrayable;
+
+class Address implements Arrayable
 {
     public function __construct(
         private string $street,
@@ -60,5 +62,16 @@ class Address
     public function setCoordinates(Coordinates $coordinates): void
     {
         $this->coordinates = $coordinates;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            "street" => $this->getStreet(),
+            "suite" => $this->getSuite(),
+            "city" => $this->getCity(),
+            "zipcode" => $this->getZipcode(),
+            "coordinates" => $this->getCoordinates(),
+        ];
     }
 }

@@ -7,19 +7,20 @@ use App\Models\Address;
 use App\Models\Author;
 use App\Models\Company;
 use App\Models\Coordinates;
+use Illuminate\Support\Collection;
 
 class AuthorRepository extends ApiRepository implements AuthorRepositoryInterface
 {
     protected string $path = 'users';
 
-    public function all(): array
+    public function all(): Collection
     {
         $results = $this->get();
-        if (!$results) return [];
+        if (!$results) return new Collection();
 
-        $data = [];
+        $data = new Collection();
         foreach ($results as $result) {
-            $data[] = $this->make($result);
+            $data->push($this->make($result));
         }
 
         return $data;

@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Post
+use Illuminate\Contracts\Support\Arrayable;
+
+class Post implements Arrayable
 {
     public function __construct(
         private int $id,
@@ -44,5 +46,15 @@ class Post
     public function setBody(string $body): void
     {
         $this->body = $body;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            "id" => $this->getId(),
+            "authorId" => $this->getAuthorId(),
+            "title" => $this->getTitle(),
+            "body" => $this->getBody(),
+        ];
     }
 }

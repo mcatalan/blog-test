@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\Api\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/post', [PostController::class, 'index']);
-Route::post('/post', [PostController::class, 'store']);
+Route::get('/post', [PostController::class, 'index'])->name('api.post.index');
+Route::get('/post/{id}', [PostController::class, 'show'])->name('api.post.show');
+Route::post('/post', [PostController::class, 'store'])->name('api.post.store');

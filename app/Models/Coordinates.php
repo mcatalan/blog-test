@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Coordinates
+use Illuminate\Contracts\Support\Arrayable;
+
+class Coordinates implements Arrayable
 {
     public function __construct(
         private float $lat,
@@ -27,5 +29,13 @@ class Coordinates
     public function setLng(float $lng): void
     {
         $this->lng = $lng;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            "lat" => $this->getLat(),
+            "lng" => $this->getLng(),
+        ];
     }
 }

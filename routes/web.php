@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('post.index');
+})->name('post.index');
+
+Route::get('/post/{id}', function (int $id) {
+    return view('post.show', [
+        "id" => $id
+    ]);
+})->name('post.show');

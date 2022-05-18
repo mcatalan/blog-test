@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Company
+use Illuminate\Contracts\Support\Arrayable;
+
+class Company implements Arrayable
 {
     public function __construct(
         private string $name,
@@ -38,5 +40,14 @@ class Company
     public function setBs(string $bs): void
     {
         $this->bs = $bs;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            "name" => $this->getName(),
+            "catchPhrase" => $this->getCatchPhrase(),
+            "bs" => $this->getBs(),
+        ];
     }
 }
